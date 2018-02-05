@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sinohealth.cloud</groupId>
+	<artifactId>cloud-master</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.7.RELEASE</version>
+	</parent>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.SR1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+			<!-- could-api属于公共插件，在cloud那里引入是为了同意管理版本号(自己写的),如果有哪个子工程用到就再到用时在子项目的pom中引入 -->		
+			<dependency>
+			  <groupId>com.sinohealth.cloud.api</groupId>
+			  <artifactId>could-api</artifactId>
+			  <version>0.0.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sinohealth.cloud.security</groupId>
+			    <artifactId>Security</artifactId>
+			    <version>0.0.1</version>
+			</dependency>
+			
+
+             <dependency>
+                 <groupId>com.alibaba</groupId>
+                 <artifactId>druid</artifactId>
+                 <version>1.0.11</version>
+             </dependency>
+             
+             <!-- 数据库访问必需 -->
+             <dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-math3</artifactId>
+			    <version>3.6</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+    	<finalName>cloud</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                	<source>${jdk.version}</source>
+                	<target>${jdk.version}</target>
+                	<encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                	<delimiters>
+                		<delimiter>$</delimiter>
+                	</delimiters>
+                </configuration>
+            </plugin>
+            
+            
+        </plugins>
+    </build>
+
+	<!-- 声明有当前项目有哪些子项目 -->
+    <modules>
+    	<module>could-api</module>
+    	<module>Security</module>
+    	<module>CaculateService</module>
+    	<module>Consumer</module>
+    	<module>DataProvideService</module>
+    	<module>EurekaServer</module>
+    	<!-- <module>DataProvideService</module>
+    	<module>CaculateService</module>
+    	<module>EurekaServer</module>
+    	<module>Consumer</module> -->
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

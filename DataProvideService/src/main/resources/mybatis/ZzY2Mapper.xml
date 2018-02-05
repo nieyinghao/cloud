@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.sinohealth.cloud.mybatis.dao.ZzY2Mapper">
+
+    <!-- 所有列 -->
+    <sql id="Column_list">
+        PROVINCE,CITYN,DATE1,PERIOD,YEAR,ISSUE_WEEKDAY,WEATHER_DAY,WEATHER_NIGHT,TEMPERATURE_DAY,PRE_D_T_1,PRE_D_T_2,
+		PRE_D_T_3,PRE_D_T_4,PRE_D_T_5
+    </sql>
+
+    <resultMap id="ListTest" type="com.sinohealth.cloud.vo.ZzY2" >
+        <id  column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="haha" property="haha" />
+    </resultMap>
+
+    <!-- 根据ID查询数据 -->
+    <select id="getTemperatureSample" resultMap="ListTest">
+        SELECT
+        <include refid="Column_list" />
+        FROM zz_y2
+        WHERE CITYN = #{0} and PERIOD = #{1}
+
+    </select>
+    
+    
+    
+
+</mapper>
