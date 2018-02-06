@@ -18,7 +18,7 @@ public class TestControler {
 		double[] y = {1,2};
 
 
-		return "";
+		return "miaomiao";
 		
 	}
 }

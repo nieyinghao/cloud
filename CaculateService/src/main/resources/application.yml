@@ -28,5 +28,5 @@ eureka:
     register-with-eureka: true #这个是计算框架，我也注册一下
   instance:
     appname: caculate_service
-    instance-id: hehe
-    prefer-ip-address: true #表示显示的是ip地址
+#    instance-id: hehe
+    ip-address: true #表示显示的是ip地址

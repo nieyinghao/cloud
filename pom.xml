@@ -102,10 +102,6 @@
     	<module>Consumer</module>
     	<module>DataProvideService</module>
     	<module>EurekaServer</module>
-    	<!-- <module>DataProvideService</module>
-    	<module>CaculateService</module>
-    	<module>EurekaServer</module>
-    	<module>Consumer</module> -->
     </modules>
 
     <repositories>
