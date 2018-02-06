@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.sinohealth.cloud.api</groupId>
-	<artifactId>could-api</artifactId>
+	<artifactId>cloud-api</artifactId>
 	<version>0.0.1</version>
-	<name>could-api</name>
+	<name>cloud-api</name>
 </project>

@@ -21,7 +21,7 @@
 
 		<dependency>
 			<groupId>com.sinohealth.cloud.api</groupId>
-			<artifactId>could-api</artifactId>
+			<artifactId>cloud-api</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 		<!-- web服务必需 -->

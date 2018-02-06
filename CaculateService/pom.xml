@@ -16,7 +16,7 @@
 
 		<dependency>
 			<groupId>com.sinohealth.cloud.api</groupId>
-			<artifactId>could-api</artifactId>
+			<artifactId>cloud-api</artifactId>
 		</dependency>
 
 		<!-- 如果该服务需要用boot-security则用取消注解即可 <dependency> <groupId>com.sinohealth.cloud.security</groupId> 

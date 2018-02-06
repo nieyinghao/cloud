@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.mcc.cloud</groupId>
-    <artifactId>could</artifactId>
+    <artifactId>cloud</artifactId>
     <version>0.0.1</version>
   </parent>
   <groupId>com.mcc.security</groupId>
@@ -20,7 +20,7 @@
 					
 			<dependency>
 			  <groupId>com.mcc.api</groupId>
-			  <artifactId>could-api</artifactId>
+			  <artifactId>cloud-api</artifactId>
 			  <version>0.0.1</version>
 			</dependency>
   			<!-- web服务必需 -->

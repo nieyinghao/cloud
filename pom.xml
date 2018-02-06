@@ -22,10 +22,10 @@
 				<scope>import</scope>
 			</dependency>
 			
-			<!-- could-api属于公共插件，在cloud那里引入是为了同意管理版本号(自己写的),如果有哪个子工程用到就再到用时在子项目的pom中引入 -->		
+			<!-- cloud-api属于公共插件，在cloud那里引入是为了同意管理版本号(自己写的),如果有哪个子工程用到就再到用时在子项目的pom中引入 -->		
 			<dependency>
 			  <groupId>com.sinohealth.cloud.api</groupId>
-			  <artifactId>could-api</artifactId>
+			  <artifactId>cloud-api</artifactId>
 			  <version>0.0.1</version>
 			</dependency>
 			
@@ -96,7 +96,7 @@
 
 	<!-- 声明有当前项目有哪些子项目 -->
     <modules>
-    	<module>could-api</module>
+    	<module>cloud-api</module>
     	<module>Security</module>
     	<module>CaculateService</module>
     	<module>Consumer</module>
