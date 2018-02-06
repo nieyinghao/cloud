@@ -12,13 +12,13 @@ import com.sinohealth.cloud.impl.math.LinearImpl;
 @RestController
 public class TestControler {
 	@RequestMapping(value = "/linear/test", method = RequestMethod.GET)
-	public DataFrame index(@RequestBody DataFrame df){
+	public Object index(String id){
 		
 		double[][] x = {{1,2},{3,4}};
 		double[] y = {1,2};
-		DataFrame haha = new LinearImpl().matrixMultiply(x, y);		
 
-		return haha;
+
+		return "";
 		
 	}
 }

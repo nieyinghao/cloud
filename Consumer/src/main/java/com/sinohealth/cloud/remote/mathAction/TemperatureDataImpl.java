@@ -1,6 +1,5 @@
 package com.sinohealth.cloud.remote.mathAction;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.sinohealth.cloud.interfaces.RemoteData.TemperatureData;
 import com.sinohealth.cloud.vo.BaseVo;
-import com.sinohealth.cloud.vo.Nyh;
 import com.sinohealth.cloud.vo.ZzY2;
 
 public class TemperatureDataImpl implements  TemperatureData {
