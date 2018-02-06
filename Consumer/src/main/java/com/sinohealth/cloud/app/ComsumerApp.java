@@ -15,7 +15,6 @@ public class ComsumerApp {
 		
 		System.out.println("haha");
 		
-		
 	
 
 	} 
