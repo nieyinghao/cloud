@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class CaculateServiceApp {
 
 	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CaculateServiceApp.class, args); //111111
 		System.out.println("haha");
