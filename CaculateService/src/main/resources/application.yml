@@ -23,18 +23,18 @@ server:
 #  type-aliases-package: com.mcc.mybatis.domain
 spring:
   application:
-    name: caculate_service1
+    name: caculate-service
 eureka:
   client:
     service-url:
       defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka,http://eureka-7003.com:7003/eureka
 #      defaultZone: http://eureka-7001.com:7001/eureka
-    register-with-eureka: true #这个是计算框架，我也注册一下
-  instance:
-    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
-    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
-    instance-id: caculate-8080.com #这个要在hosts中配别名
-    prefer-ip-address: true #访问路径变为ip地址
+#      register-with-eureka: true #这个是计算框架，我也注册一下
+#  instance:
+#    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+#    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+#    instance-id: caculate-8080.com #这个要在hosts中配别名
+#    prefer-ip-address: true #访问路径变为ip地址
     
 info:
   company.name: www.sinohealth.com

@@ -16,30 +16,31 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class ComsumerControler {
 	
-
 	@Resource  
     private RestTemplate restTemplate; 
 	
 	@Resource
 	private HttpHeaders headers;
 	
-	public static final String DEPT_LIST_URL = "http://CACULATE_SERVICE1/linear/test";
+	public static final String DEPT_LIST_URL = "http://caculate-service/linear/test";
+//	public static final String DEPT_LIST_URL = "http://localhost:8080/linear/test";
 	
+
 	@RequestMapping(value = "/matrix/inverse111", method = RequestMethod.GET)
 	public String matrixInverse(){
 		
 		
 		
-//		String flag = loadBalancedRestTemplate.exchange(DEPT_LIST_URL, HttpMethod.GET,
-//				new HttpEntity<Object>( this.headers), String.class)
-//				.getBody();
+		String flag = restTemplate.exchange(DEPT_LIST_URL, HttpMethod.GET,
+				new HttpEntity<Object>( this.headers), String.class)
+				.getBody();
 		
 		String id = "成功啦";
-		restTemplate.getForObject(DEPT_LIST_URL, String.class);
+		String flag2 = restTemplate.getForObject(DEPT_LIST_URL, String.class);
 		
 		
 		
-		return restTemplate.toString();
+		return flag+","+flag2;
 
 	}
 	
