@@ -11,14 +11,13 @@ import com.sinohealth.cloud.impl.math.LinearImpl;
 
 @RestController
 public class TestControler {
-	@RequestMapping(value = "/linear/test", method = RequestMethod.GET)
-	public Object index(String id){
+	@RequestMapping(value = "/linear/test",method=RequestMethod.GET)
+	public Object index(){
 		
 		double[][] x = {{1,2},{3,4}};
 		double[] y = {1,2};
 
-
-		return "miaomiao";
+		return "good!!";
 		
 	}
 }

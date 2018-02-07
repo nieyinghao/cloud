@@ -1,8 +1,11 @@
 server:
   port: 80
 
+spring:
+  application:
+    name: consumer_80
 eureka:
   client:
     service-url:
       defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka,http://eureka-7003.com:7003/eureka
-    register-with-eureka: false #这个是计算框架，我也注册一下
+    register-with-eureka: true #这个是计算框架，我也注册一下
