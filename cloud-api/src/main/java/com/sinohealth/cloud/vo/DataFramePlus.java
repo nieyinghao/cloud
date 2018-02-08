@@ -29,9 +29,7 @@ public class DataFramePlus {
 	 */
 	public int[] dimensions;
 	
-	/**
-	 * 数据
-	 */
+	/**/
 	public double[][] data;
 	
 	/**
