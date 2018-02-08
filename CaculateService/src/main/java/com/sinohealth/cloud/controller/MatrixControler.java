@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sinohealth.cloud.math.service.LinearService;
 import com.sinohealth.cloud.math.service.MatrixService;
 import com.sinohealth.cloud.vo.DataFrame;
+import com.sinohealth.cloud.vo.DataFramePlus;
 
 
 @RestController
 public class MatrixControler {
 	@RequestMapping(value = "/matrix/inverse", method = RequestMethod.POST)
-	public DataFrame matrixInverse(@RequestBody DataFrame df){
+	public DataFramePlus matrixInverse(@RequestBody DataFrame df){
 		
 		double[][] datas = df.getDatas();
-		DataFrame reultDf = new MatrixService().inverse(datas);
+		DataFramePlus reultDf = new MatrixService().inverse(datas);
 		return reultDf;
 
 	}
@@ -26,10 +26,10 @@ public class MatrixControler {
 	
 	@RequestMapping(value = "/matrix/transpose", method = RequestMethod.POST, 
             consumes = "application/json")
-	public DataFrame matrixTranspose(@RequestBody DataFrame df){
+	public DataFramePlus matrixTranspose(@RequestBody DataFrame df){
 		
 		double[][] datas = df.getDatas();
-		DataFrame reultDf = new MatrixService().inverse(datas);
+		DataFramePlus reultDf = new MatrixService().inverse(datas);
 		
 		return reultDf;
 		
@@ -37,22 +37,22 @@ public class MatrixControler {
 	
 	
 	@RequestMapping(value = "/matrix/multiply", method = RequestMethod.POST,consumes = "application/json")
-	public DataFrame multiply(@RequestBody DataFrame df){
+	public DataFramePlus multiply(@RequestBody DataFrame df){
 		
 		
-		DataFrame res = new MatrixService().multiply(df.getDatas(), df.getDatas());
+		DataFramePlus res = new MatrixService().multiply(df.getDatas(), df.getDatas());
 		
 		
-//		DataFrame resultDf = new DataFrame();
+//		reultDf resultDf = new DataFramePlus();
 		return res;
 		
 	}
 	
 	
 	@RequestMapping(value = "/matrix/add", method = RequestMethod.POST,consumes = "application/json")
-	public DataFrame add(@RequestBody DataFrame df){
+	public DataFramePlus add(@RequestBody DataFrame df){
 
-		DataFrame res = new MatrixService().add(df.getDatas(), df.getDatas());
+		DataFramePlus res = new MatrixService().add(df.getDatas(), df.getDatas());
 		
 		return res;
 		

@@ -2,6 +2,7 @@ package com.sinohealth.cloud.vo;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,18 @@ public class DataFramePlus {
 	 * 转置后的数据
 	 */
 	public double[][] dataTransposed;
+
+	/**
+	 * message
+	 */
+	public String message;
 	
+	/**
+	 * flag 
+	 */
+	public Boolean flag;
+	
+
 	//测试方法
 	public static void main(String[] args) throws Exception {
 		double[][] matrixData = { {1d,2d,3d}, {2d,5d,3d}};
@@ -49,24 +61,44 @@ public class DataFramePlus {
 //		System.out.println(json);
 //		System.out.println(df);
 		DataFramePlus d = json2Bean(json, DataFramePlus.class);
-		double[] column = d.transfer2RealMatrix().getColumn(1);
-		for (double c: column) {
+		
+		ArrayList<DataFramePlus> list = new ArrayList<DataFramePlus>();
+		list.add(new DataFramePlus());
+		list.add(new DataFramePlus());
+		DataFramePlus dfp = new DataFramePlus();
+		Map map = new HashMap<String, Integer>();
+		map.put("haha", 1);
+		dfp.setField2Index(map);
+		
+		
+		
+		
+		
+		list.add(dfp);
+		list.add(new DataFramePlus());
+		
+		String jsons = bean2Json(list);
+		
+		System.out.println(jsons);
+		
+//		double[] column = d.transfer2RealMatrix().getColumn(1);
+//		for (double c: column) {
+////			System.out.println(c);
+//		}
+////		System.out.println(d.transfer2RealMatrix().getColumn(1));
+////		System.out.println(DataFramePlus);
+//		
+//		for (double c: df.getRow(1)) {
 //			System.out.println(c);
-		}
-//		System.out.println(d.transfer2RealMatrix().getColumn(1));
-//		System.out.println(DataFramePlus);
-		
-		for (double c: df.getRow(1)) {
-			System.out.println(c);
-		}
-		
-		for (double c: df.getColumn(1)) {
-			System.out.println(c);
-		}
-		
-		for (double c: df.getColumn("c0")) {
-			System.out.println(c);
-		}
+//		}
+//		
+//		for (double c: df.getColumn(1)) {
+//			System.out.println(c);
+//		}
+//		
+//		for (double c: df.getColumn("c0")) {
+//			System.out.println(c);
+//		}
 	}
 
 	/**
@@ -219,9 +251,31 @@ public class DataFramePlus {
 		this.dataTransposed = dataTransposed;
 	}
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
+
 	@Override
 	public String toString() {
 		return "DataFramePlus [field2Index=" + field2Index + ", index2Field=" + index2Field + ", dimensions="
-				+ Arrays.toString(dimensions) + ", data=" + data + "]";
+				+ Arrays.toString(dimensions) + ", data=" + Arrays.toString(data) + ", dataTransposed="
+				+ Arrays.toString(dataTransposed) + ", message=" + message + ", flag=" + flag + "]";
 	}
+
+
+	
+	
+
 }
