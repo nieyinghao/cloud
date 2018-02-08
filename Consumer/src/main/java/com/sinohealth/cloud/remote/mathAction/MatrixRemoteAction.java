@@ -2,10 +2,10 @@ package com.sinohealth.cloud.remote.mathAction;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.sinohealth.cloud.interfaces.math.Matrix;
+import com.sinohealth.cloud.math.service.interfaces.IMatrixService;
 import com.sinohealth.cloud.vo.DataFrame;
 
-public class MatrixRemoteAction implements Matrix {
+public class MatrixRemoteAction implements IMatrixService {
 
 
 	public DataFrame inverse(double[][] datas) {

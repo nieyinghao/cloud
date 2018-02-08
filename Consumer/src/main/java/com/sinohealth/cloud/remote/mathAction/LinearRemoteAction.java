@@ -5,13 +5,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
-import com.sinohealth.cloud.interfaces.math.Linear;
+import com.sinohealth.cloud.math.service.interfaces.ILinearService;
 import com.sinohealth.cloud.vo.DataFrame;
 
 
 @Service
-public class LinearRemoteAction implements Linear {
+public class LinearRemoteAction implements ILinearService {
 	
 	@Resource
 	private RestTemplate  restTemplate;

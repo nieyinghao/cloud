@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sinohealth.cloud.impl.math.LinearImpl;
+import com.sinohealth.cloud.math.service.LinearService;
 import com.sinohealth.cloud.vo.DataFrame;
 
 
@@ -16,7 +16,7 @@ public class LinearControler {
 		
 		double[][] x = df.getDatas();
 		double[] y = df.getData();
-		DataFrame haha = new LinearImpl().matrixMultiply(x, y);		
+		DataFrame haha = new LinearService().matrixMultiply(x, y);		
 
 		return haha;
 		

@@ -17,10 +17,8 @@ public class ComsumerApp {
 	public static void main(String[] args) {
 		SpringApplication.run(ComsumerApp.class, args); //
 		
-		
 		System.out.println("haha");
 		
-
 	} 
 	
 

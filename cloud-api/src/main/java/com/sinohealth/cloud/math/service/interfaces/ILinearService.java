@@ -1,7 +1,7 @@
-package com.sinohealth.cloud.interfaces.math;
+package com.sinohealth.cloud.math.service.interfaces;
 
 import com.sinohealth.cloud.vo.DataFrame;
 
-public interface Linear {
+public interface ILinearService {
 	public DataFrame matrixMultiply(double[][] x,double[] y);
 }

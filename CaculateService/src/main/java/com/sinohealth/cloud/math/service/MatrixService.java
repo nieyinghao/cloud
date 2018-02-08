@@ -1,4 +1,4 @@
-package com.sinohealth.cloud.impl.math;
+package com.sinohealth.cloud.math.service;
 
 import org.apache.commons.math3.exception.DimensionMismatchException;
 import org.apache.commons.math3.exception.NoDataException;
@@ -7,10 +7,10 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 
-import com.sinohealth.cloud.interfaces.math.Matrix;
+import com.sinohealth.cloud.math.service.interfaces.IMatrixService;
 import com.sinohealth.cloud.vo.DataFrame;
 
-public class MatrixImpl implements Matrix {
+public class MatrixService implements IMatrixService {
 
 	public DataFrame inverse(double[][] datas) {
 		// TODO Auto-generated method stub

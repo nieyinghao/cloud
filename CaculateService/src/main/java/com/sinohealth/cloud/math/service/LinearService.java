@@ -1,15 +1,14 @@
-package com.sinohealth.cloud.impl.math;
+package com.sinohealth.cloud.math.service;
 
 import java.util.ArrayList;
 
 import org.apache.commons.math3.exception.MathIllegalArgumentException;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
-
-import com.sinohealth.cloud.interfaces.math.Linear;
+import com.sinohealth.cloud.math.service.interfaces.ILinearService;
 import com.sinohealth.cloud.vo.DataFrame;
 
-public class LinearImpl implements Linear {
+public class LinearService implements ILinearService {
 
 
 	public DataFrame matrixMultiply(double[][] x,double[] y) {

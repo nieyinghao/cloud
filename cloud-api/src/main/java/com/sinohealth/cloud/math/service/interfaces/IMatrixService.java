@@ -1,8 +1,8 @@
-package com.sinohealth.cloud.interfaces.math;
+package com.sinohealth.cloud.math.service.interfaces;
 import com.sinohealth.cloud.vo.DataFrame;
 
 
-public interface Matrix {
+public interface IMatrixService {
 
 	public DataFrame inverse(double[][] datas);
 	
