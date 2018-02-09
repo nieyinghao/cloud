@@ -1,8 +1,10 @@
-package com.sinohealth.cloud.impl.math;
+package com.sinohealth.cloud.math.service;
 
 import org.apache.commons.math3.stat.inference.TestUtils;
 
-public class StatisticsImpl implements com.sinohealth.cloud.interfaces.math.Statistics {
+import com.sinohealth.cloud.math.service.interfaces.IStatisticsService;
+
+public class StatisticsService implements IStatisticsService {
 	
 	
 	public String TExamine(double[] sample, double mu, boolean flag) {

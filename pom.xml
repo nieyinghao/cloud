@@ -35,6 +35,11 @@
 			    <version>0.0.1</version>
 			</dependency>
 			
+			<dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-mapper-asl</artifactId>
+	            <version>1.9.13</version>
+	        </dependency>
 
              <dependency>
                  <groupId>com.alibaba</groupId>
@@ -102,10 +107,6 @@
     	<module>Consumer</module>
     	<module>DataProvideService</module>
     	<module>EurekaServer</module>
-    	<!-- <module>DataProvideService</module>
-    	<module>CaculateService</module>
-    	<module>EurekaServer</module>
-    	<module>Consumer</module> -->
     </modules>
 
     <repositories>
