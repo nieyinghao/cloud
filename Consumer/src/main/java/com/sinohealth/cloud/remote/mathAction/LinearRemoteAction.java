@@ -30,10 +30,10 @@ public class LinearRemoteAction implements ILinearService {
 		
 		DataFramePlus[] dfs = {df,df2};
 		
-		System.out.println("1"+df.bean2Json(dfs));
+		System.out.println("1"+DataFramePlus.bean2Json(dfs));
 		String responseBean = null;
 
-		responseBean = restTemplate.postForObject(url, df.bean2Json(dfs), String.class);
+		responseBean = restTemplate.postForObject(url, DataFramePlus.bean2Json(dfs), String.class);
 
 		dfs = DataFramePlus.json2Bean(responseBean, DataFramePlus[].class);
         

@@ -14,6 +14,7 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 public class DataFramePlus implements Serializable{
 	/**
@@ -52,7 +53,7 @@ public class DataFramePlus implements Serializable{
 	/**
 	 * flag 
 	 */
-	public Boolean flag;
+	public Boolean flag = false;
 	
 
 	//测试方法
@@ -160,10 +161,12 @@ public class DataFramePlus implements Serializable{
 	 */
 	public static String bean2Json(Object obj) {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(Inclusion.NON_NULL);
         StringWriter sw = new StringWriter();
         JsonGenerator gen;
 		try {
 			gen = new JsonFactory().createJsonGenerator(sw);
+			
 	        mapper.writeValue(gen, obj);
 	        gen.close();
 		} catch (IOException e) {

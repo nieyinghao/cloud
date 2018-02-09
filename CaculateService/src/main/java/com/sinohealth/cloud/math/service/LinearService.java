@@ -34,8 +34,8 @@ public class LinearService implements ILinearService {
 					
 					double[][] ha = {{beta[0]}};
 					resultDf2.setData(ha);
-					resultDf2.setMessage("这个是系数返回");
-					
+					resultDf2.setMessage("这个是系数返回,"+resultStr);
+					resultDf2.setFlag(true);
 					
 					double[] coefficients = new double[beta.length-1];
 					
