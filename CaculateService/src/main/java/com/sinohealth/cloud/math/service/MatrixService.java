@@ -6,11 +6,13 @@ import org.apache.commons.math3.exception.NullArgumentException;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
+import org.springframework.stereotype.Service;
 
 import com.sinohealth.cloud.math.service.interfaces.IMatrixService;
 import com.sinohealth.cloud.vo.DataFrame;
 import com.sinohealth.cloud.vo.DataFramePlus;
 
+@Service
 public class MatrixService implements IMatrixService {
 
 	public DataFramePlus inverse(double[][] datas) {
@@ -101,6 +103,38 @@ public class MatrixService implements IMatrixService {
 		df.setFlag(true);
 
 		return df;
+	}
+
+	public DataFramePlus binarization(DataFramePlus[] dps) {
+		// TODO Auto-generated method stub
+		DataFramePlus metaData = dps[0]; 
+		DataFramePlus dp = dps[1];
+		double[] thresholdVector =  dp.getData()[0];
+		
+		DataFramePlus resultDp = metaData.deepClone();
+		
+		
+		double[][] data = metaData.getData();
+		  
+		double[][] resultData = new double [data.length][data[0].length]; 
+		
+		System.out.println(thresholdVector.length);
+		
+		System.out.println("yoxi:"+data.length);
+	    for(int a = 0 ;a<data.length;a++){//获取行的长度  
+	        for(int b = 0 ;b<data[a].length;b++){//获取列的长度  
+	              if(data[a][b]>thresholdVector[b]){
+	            	  System.out.println(data[a][b]+","+thresholdVector[b]);
+	            	  resultData[a][b]=1;
+	              }else {
+//	            	  resultData[a][b] = 0;
+	              }
+	        }  
+	    }  
+		
+		resultDp.setData(resultData);
+		resultDp.setMessage("二值化成功");
+		return resultDp;
 	}
 	
 	

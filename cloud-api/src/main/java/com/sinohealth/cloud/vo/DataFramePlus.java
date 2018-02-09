@@ -1,6 +1,10 @@
 package com.sinohealth.cloud.vo;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -14,9 +18,8 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-public class DataFramePlus implements Serializable{
+public class DataFramePlus implements Cloneable, Serializable {
 	/**
 	 * 
 	 */
@@ -26,20 +29,20 @@ public class DataFramePlus implements Serializable{
 	 * 根据列名查找列索引
 	 */
 	public Map<String, Integer> field2Index;
-	
+
 	/**
 	 * 根据列索引查找列名
 	 */
 	public Map<Integer, String> index2Field;
-	
+
 	/**
 	 * 维度
 	 */
 	public int[] dimensions;
-	
+
 	/**/
 	public double[][] data;
-	
+
 	/**
 	 * 转置后的数据
 	 */
@@ -49,26 +52,25 @@ public class DataFramePlus implements Serializable{
 	 * message
 	 */
 	public String message;
-	
-	/**
-	 * flag 
-	 */
-	public Boolean flag = false;
-	
 
-	//测试方法
+	/**
+	 * flag
+	 */
+	public Boolean flag;
+
+	// 测试方法
 	public static void main(String[] args) throws Exception {
-		double[][] matrixData = { {1d,2d,3d}, {2d,5d,3d}};
-		
+		double[][] matrixData = { { 1d, 2d, 3d }, { 2d, 5d, 3d } };
+
 		DataFramePlus df = new DataFramePlus();
 		df.setData(matrixData);
-		String[] fields = {"c0", "c1"};
+		String[] fields = { "c0", "c1" };
 		DataFramePlus.setFieldIndex(df, fields);
 		String json = bean2Json(df);
-//		System.out.println(json);
-//		System.out.println(df);
+		// System.out.println(json);
+		// System.out.println(df);
 		DataFramePlus d = json2Bean(json, DataFramePlus.class);
-		
+
 		ArrayList<DataFramePlus> list = new ArrayList<DataFramePlus>();
 		list.add(new DataFramePlus());
 		list.add(new DataFramePlus());
@@ -76,75 +78,76 @@ public class DataFramePlus implements Serializable{
 		Map map = new HashMap<String, Integer>();
 		map.put("haha", 1);
 		dfp.setField2Index(map);
-		
-		
-		
-		
-		
+
 		list.add(dfp);
 		list.add(new DataFramePlus());
-		
+
 		String jsons = bean2Json(list);
-		
+
 		System.out.println(jsons);
-		
-//		double[] column = d.transfer2RealMatrix().getColumn(1);
-//		for (double c: column) {
-////			System.out.println(c);
-//		}
-////		System.out.println(d.transfer2RealMatrix().getColumn(1));
-////		System.out.println(DataFramePlus);
-//		
-//		for (double c: df.getRow(1)) {
-//			System.out.println(c);
-//		}
-//		
-//		for (double c: df.getColumn(1)) {
-//			System.out.println(c);
-//		}
-//		
-//		for (double c: df.getColumn("c0")) {
-//			System.out.println(c);
-//		}
+
+		// double[] column = d.transfer2RealMatrix().getColumn(1);
+		// for (double c: column) {
+		//// System.out.println(c);
+		// }
+		//// System.out.println(d.transfer2RealMatrix().getColumn(1));
+		//// System.out.println(DataFramePlus);
+		//
+		// for (double c: df.getRow(1)) {
+		// System.out.println(c);
+		// }
+		//
+		// for (double c: df.getColumn(1)) {
+		// System.out.println(c);
+		// }
+		//
+		// for (double c: df.getColumn("c0")) {
+		// System.out.println(c);
+		// }
 	}
 
 	/**
 	 * 转换成RealMatrix
+	 * 
 	 * @return
 	 */
 	public RealMatrix transfer2RealMatrix() {
 		return transfer2RealMatrix(this.data);
 	}
-	
+
 	/**
 	 * 根据行索引获取行数据
+	 * 
 	 * @param rowIndex
 	 * @return
 	 */
 	public double[] getRow(int rowIndex) {
 		return this.data[rowIndex];
 	}
-	
+
 	/**
 	 * 根据列索引获取列数据
+	 * 
 	 * @param columnIndex
 	 * @return
 	 */
 	public double[] getColumn(int columnIndex) {
 		return this.dataTransposed[columnIndex];
 	}
-	
+
 	/**
 	 * 根据列名获取列数据
+	 * 
 	 * @param field
 	 * @return
 	 */
 	public double[] getColumn(String field) {
 		return this.dataTransposed[field2Index.get(field)];
 	}
-	
+
 	/**
 	 * 转换成RealMatrix
+	 * 
 	 * @param data
 	 * @return
 	 */
@@ -152,33 +155,33 @@ public class DataFramePlus implements Serializable{
 		RealMatrix m = MatrixUtils.createRealMatrix(data);
 		return m;
 	}
-	
+
 	/**
 	 * 转换成json
+	 * 
 	 * @param obj
 	 * @return
 	 * @throws IOException
 	 */
 	public static String bean2Json(Object obj) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setSerializationInclusion(Inclusion.NON_NULL);
-        StringWriter sw = new StringWriter();
-        JsonGenerator gen;
+		ObjectMapper mapper = new ObjectMapper();
+		StringWriter sw = new StringWriter();
+		JsonGenerator gen;
 		try {
 			gen = new JsonFactory().createJsonGenerator(sw);
-			
-	        mapper.writeValue(gen, obj);
-	        gen.close();
+			mapper.writeValue(gen, obj);
+			gen.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-        return sw.toString();
-    }
+		return sw.toString();
+	}
 
 	/**
 	 * json转换成bean
+	 * 
 	 * @param jsonStr
 	 * @param objClass
 	 * @return
@@ -186,10 +189,9 @@ public class DataFramePlus implements Serializable{
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-    public static <T> T json2Bean(String jsonStr, Class<T> objClass)
-            {
-        ObjectMapper mapper = new ObjectMapper();
-        T result = null;
+	public static <T> T json2Bean(String jsonStr, Class<T> objClass) {
+		ObjectMapper mapper = new ObjectMapper();
+		T result = null;
 		try {
 			result = mapper.readValue(jsonStr, objClass);
 		} catch (JsonParseException e) {
@@ -202,14 +204,15 @@ public class DataFramePlus implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return result;
-    }
-	
-    /**
-     * 设置列名和列索引
-     * @param df
-     * @param fields
-     */
+		return result;
+	}
+
+	/**
+	 * 设置列名和列索引
+	 * 
+	 * @param df
+	 * @param fields
+	 */
 	public static void setFieldIndex(DataFramePlus df, String[] fields) {
 		if (df == null || fields == null || fields.length == 0) {
 			return;
@@ -225,7 +228,6 @@ public class DataFramePlus implements Serializable{
 		df.setField2Index(field2Index);
 		df.setIndex2Field(index2Field);
 	}
-	
 
 	public Map<String, Integer> getField2Index() {
 		return field2Index;
@@ -262,8 +264,8 @@ public class DataFramePlus implements Serializable{
 		this.data = data;
 		int r = data.length;
 		int c = data[0].length;
-		this.dimensions = new int[] {r, c};
-		
+		this.dimensions = new int[] { r, c };
+
 		this.dataTransposed = new double[c][r];
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[0].length; j++) {
@@ -271,7 +273,7 @@ public class DataFramePlus implements Serializable{
 			}
 		}
 	}
-	
+
 	public double[][] getDataTransposed() {
 		return dataTransposed;
 	}
@@ -279,7 +281,7 @@ public class DataFramePlus implements Serializable{
 	public void setDataTransposed(double[][] dataTransposed) {
 		this.dataTransposed = dataTransposed;
 	}
-	
+
 	public String getMessage() {
 		return message;
 	}
@@ -287,7 +289,7 @@ public class DataFramePlus implements Serializable{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public Boolean getFlag() {
 		return flag;
 	}
@@ -303,8 +305,27 @@ public class DataFramePlus implements Serializable{
 				+ Arrays.toString(dataTransposed) + ", message=" + message + ", flag=" + flag + "]";
 	}
 
-
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 	
-	
+	//深度克隆，主要是如果对方传入一些列名的话用在返回的时候如果不需要改动就不用从新set了
+	public DataFramePlus deepClone() {
+		DataFramePlus ct = null;
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(this);
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			ct = (DataFramePlus) ois.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return ct;
+	}
 
 }

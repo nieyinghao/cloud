@@ -11,6 +11,6 @@ public interface IMatrixService {
 	
 	public DataFramePlus multiply(double[][] data1,double[][] data2);
 	
-	
+	public DataFramePlus binarization(DataFramePlus[] dps);
 
 }

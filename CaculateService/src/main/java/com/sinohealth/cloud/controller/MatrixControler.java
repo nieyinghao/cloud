@@ -2,6 +2,8 @@ package com.sinohealth.cloud.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,11 +16,14 @@ import com.sinohealth.cloud.vo.DataFramePlus;
 
 @RestController
 public class MatrixControler {
+	@Resource
+	MatrixService matrixService;
+	
 	@RequestMapping(value = "/matrix/inverse", method = RequestMethod.POST)
 	public DataFramePlus matrixInverse(@RequestBody DataFrame df){
 		
 		double[][] datas = df.getDatas();
-		DataFramePlus reultDf = new MatrixService().inverse(datas);
+		DataFramePlus reultDf = matrixService.inverse(datas);
 		return reultDf;
 
 	}
@@ -29,7 +34,7 @@ public class MatrixControler {
 	public DataFramePlus matrixTranspose(@RequestBody DataFrame df){
 		
 		double[][] datas = df.getDatas();
-		DataFramePlus reultDf = new MatrixService().inverse(datas);
+		DataFramePlus reultDf = matrixService.inverse(datas);
 		
 		return reultDf;
 		
@@ -40,7 +45,7 @@ public class MatrixControler {
 	public DataFramePlus multiply(@RequestBody DataFrame df){
 		
 		
-		DataFramePlus res = new MatrixService().multiply(df.getDatas(), df.getDatas());
+		DataFramePlus res = matrixService.multiply(df.getDatas(), df.getDatas());
 		
 		
 //		reultDf resultDf = new DataFramePlus();
@@ -52,7 +57,7 @@ public class MatrixControler {
 	@RequestMapping(value = "/matrix/add", method = RequestMethod.POST,consumes = "application/json")
 	public DataFramePlus add(@RequestBody DataFrame df){
 
-		DataFramePlus res = new MatrixService().add(df.getDatas(), df.getDatas());
+		DataFramePlus res = matrixService.add(df.getDatas(), df.getDatas());
 		
 		return res;
 		
@@ -61,7 +66,20 @@ public class MatrixControler {
 	
 	
 	
+	@RequestMapping(value = "/matrix/binaryzation", method = RequestMethod.POST)
+	public String binaryzation(@RequestBody String json){
+
+		
+		
+		DataFramePlus[] beans = DataFramePlus.json2Bean(json, DataFramePlus[].class);
+
+		DataFramePlus result = matrixService.binarization(beans);
 	
+		String resultJson = DataFramePlus.bean2Json(result);
+		
+		return resultJson;
+		
+	}
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.sinohealth.cloud.contorller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -16,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.sinohealth.cloud.remote.mathAction.LinearRemoteAction;
+import com.sinohealth.cloud.remote.mathAction.MatrixRemoteAction;
 import com.sinohealth.cloud.vo.DataFramePlus;
 
 
 @RestController
 public class ComsumerControler {
 	
-	@Resource  
-    private RestTemplate restTemplate; 
+	@Resource MatrixRemoteAction matrixRemoteAction;
 	
 	@Resource
 	private HttpHeaders headers;
@@ -54,5 +56,30 @@ public class ComsumerControler {
 		return DataFramePlus.bean2Json(df);
 
 	}
+	
+	
+	@RequestMapping(value = "/matrix/binaryzation", method = RequestMethod.GET)
+	public String binaryzation() throws IOException{
+		
+		double[][] datas = {{-1,2,5},{2,5.6,4}};
+		double[] thresholdVector = {2,5.6,1};
+		DataFramePlus a = new DataFramePlus();
+		a.setData(datas);
+	
+		DataFramePlus b = new DataFramePlus();
+		b.setData(new double[][]{thresholdVector});
+		
+		List<DataFramePlus> list = new ArrayList<DataFramePlus>();
+		list.add(a);
+		list.add(b);
+		System.out.println(list.size());
+		DataFramePlus[] array = {a,b};
+		DataFramePlus result = matrixRemoteAction.binarization(array);
+		
+		return DataFramePlus.bean2Json(result);
+
+	}
+	
+	
 	
 }
