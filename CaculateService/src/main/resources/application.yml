@@ -2,16 +2,16 @@ server:
   port: 8080
 
 
-spring:
-  datasource:
-    url: jdbc:mysql://192.168.1.104:3306/mcc
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-    max-idle: 10
-    max-wait: 10000
-    min-idle: 5
-    initial-size: 5
+#spring:
+#  datasource:
+#    url: jdbc:mysql://192.168.1.104:3306/mcc
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#    max-idle: 10
+#    max-wait: 10000
+#    min-idle: 5
+#    initial-size: 5
 #    url: jdbc:oracle:thin:@192.168.0.132:1521:orcl
 #    username: dev
 #    password: 123456
@@ -21,12 +21,22 @@ spring:
 #  mapper-locations: classpath:mybatis/*Mapper.xml
 #  config-locations: classpath:mybatis/mybatis-config.xml
 #  type-aliases-package: com.mcc.mybatis.domain
+spring:
+  application:
+    name: caculate-service
 eureka:
   client:
     service-url:
       defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka,http://eureka-7003.com:7003/eureka
-    register-with-eureka: true #这个是计算框架，我也注册一下
-  instance:
-    appname: caculate_service
-    instance-id: hehe
-    prefer-ip-address: false #表示显示的是ip地址
+#      defaultZone: http://eureka-7001.com:7001/eureka
+#      register-with-eureka: true #这个是计算框架，我也注册一下
+#  instance:
+#    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+#    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+#    instance-id: caculate-8080.com #这个要在hosts中配别名
+#    prefer-ip-address: true #访问路径变为ip地址
+    
+info:
+  company.name: www.sinohealth.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

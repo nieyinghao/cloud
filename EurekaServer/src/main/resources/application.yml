@@ -92,7 +92,53 @@ eureka:
   instance: # eureak实例定义
     hostname: eureka-7003.com # 定义Eureka实例所在的主机名称  
     
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################单机调试时使用#########################################################
+#spring:
+#  application: 
+#    name: eureka-7001.com
+#server:
+#  port: 7001
+#  
+##security:
+##  basic:
+##    enabled: false   # 启用安全认证处理
+##  user:
+##    name: edmin     # 用户名
+##    password: mldnjava  # 密码
+##security:
+##  basic:
+##    enabled: false   # 启用安全认证处理
+##  user:
+##    name: nyh     # 用户名
+##    password: 123456  # 密码
+#
+#eureka: 
+#  instance: # eureak实例定义
+#    hostname: eureka-7001.com # 定义Eureka实例所在的主机名称
+
+
+
+
     
     
     
