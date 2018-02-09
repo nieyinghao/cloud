@@ -4,5 +4,5 @@ import com.sinohealth.cloud.vo.DataFrame;
 import com.sinohealth.cloud.vo.DataFramePlus;
 
 public interface ILinearService {
-	public DataFramePlus matrixMultiply(double[][] x,double[] y);
+	public DataFramePlus[] matrixMultiply(double[][] x,double[] y);
 }

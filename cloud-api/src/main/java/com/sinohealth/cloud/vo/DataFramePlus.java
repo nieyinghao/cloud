@@ -1,6 +1,7 @@
 package com.sinohealth.cloud.vo;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,12 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class DataFramePlus {
+public class DataFramePlus implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7273874206624190438L;
+
 	/**
 	 * 根据列名查找列索引
 	 */
@@ -152,12 +158,19 @@ public class DataFramePlus {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String bean2Json(Object obj) throws IOException {
+	public static String bean2Json(Object obj) {
         ObjectMapper mapper = new ObjectMapper();
         StringWriter sw = new StringWriter();
-        JsonGenerator gen = new JsonFactory().createJsonGenerator(sw);
-        mapper.writeValue(gen, obj);
-        gen.close();
+        JsonGenerator gen;
+		try {
+			gen = new JsonFactory().createJsonGenerator(sw);
+	        mapper.writeValue(gen, obj);
+	        gen.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
         return sw.toString();
     }
 
@@ -171,9 +184,22 @@ public class DataFramePlus {
 	 * @throws IOException
 	 */
     public static <T> T json2Bean(String jsonStr, Class<T> objClass)
-            throws JsonParseException, JsonMappingException, IOException {
+            {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(jsonStr, objClass);
+        T result = null;
+		try {
+			result = mapper.readValue(jsonStr, objClass);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return result;
     }
 	
     /**
