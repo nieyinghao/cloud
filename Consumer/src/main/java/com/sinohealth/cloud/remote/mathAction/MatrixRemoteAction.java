@@ -1,39 +1,46 @@
 package com.sinohealth.cloud.remote.mathAction;
 
+import javax.annotation.Resource;
+
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.sinohealth.cloud.interfaces.math.Matrix;
-import com.sinohealth.cloud.vo.DataFrame;
+import com.sinohealth.cloud.math.service.interfaces.IMatrixService;
+import com.sinohealth.cloud.vo.DataFramePlus;
 
-public class MatrixRemoteAction implements Matrix {
+@Service
+public class MatrixRemoteAction implements IMatrixService {
 
-
-	public DataFrame inverse(double[][] datas) {
+	@Resource
+	RestTemplate restTemplate;
+	
+	public DataFramePlus inverse(double[][] datas) {
 		// TODO Auto-generated method stub
 		String url = "http://localhost:8080/matrix/inverse";
         //入参
-	        DataFrame df = new DataFrame();
+	        DataFramePlus df = new DataFramePlus();
 
-	        df.setDatas(datas);
+	        df.setData(datas);
 	        RestTemplate restTemplate = new RestTemplate();
-	        DataFrame responseBean = restTemplate.postForObject(url, df, DataFrame.class);
+	        DataFramePlus responseBean = restTemplate.postForObject(url, df, DataFramePlus.class);
 			return responseBean;
 	}
 
-	public DataFrame transpose(double[][] datas) {
+	public DataFramePlus transpose(double[][] datas) {
 		// TODO Auto-generated method stub
 		String url = "http://localhost:8080/matrix/transpose";
         //入参
-	        DataFrame df = new DataFrame();
+	        DataFramePlus df = new DataFramePlus();
 
-	        df.setDatas(datas);
+	        df.setData(datas);
 	        RestTemplate restTemplate = new RestTemplate();
-	        DataFrame responseBean = restTemplate.postForObject(url, df, DataFrame.class);
+	        DataFramePlus responseBean = restTemplate.postForObject(url, df, DataFramePlus.class);
 		return responseBean;
 	}
 
 
-	public DataFrame multiply(double[][] data1, double[][] data2) {
+	public DataFramePlus multiply(double[][] data1, double[][] data2) {
 		// TODO Auto-generated method stub
 		return null;
 	}

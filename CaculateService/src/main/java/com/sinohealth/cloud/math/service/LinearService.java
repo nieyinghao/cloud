@@ -1,20 +1,18 @@
-package com.sinohealth.cloud.impl.math;
+package com.sinohealth.cloud.math.service;
 
-import java.util.ArrayList;
 
 import org.apache.commons.math3.exception.MathIllegalArgumentException;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
+import com.sinohealth.cloud.math.service.interfaces.ILinearService;
+import com.sinohealth.cloud.vo.DataFramePlus;
 
-import com.sinohealth.cloud.interfaces.math.Linear;
-import com.sinohealth.cloud.vo.DataFrame;
-
-public class LinearImpl implements Linear {
+public class LinearService implements ILinearService {
 
 
-	public DataFrame matrixMultiply(double[][] x,double[] y) {
-				DataFrame resultDf;
-				resultDf = new DataFrame();
+	public DataFramePlus[] matrixMultiply(double[][] x,double[] y) {
+				DataFramePlus resultDf= new DataFramePlus();
+				DataFramePlus resultDf2 = new DataFramePlus();
 				try {
 					// TODO Auto-generated method stub
 					final OLSMultipleLinearRegression regression2 = new OLSMultipleLinearRegression();  
@@ -33,16 +31,25 @@ public class LinearImpl implements Linear {
 					for (int i = 1 ; i<beta.length;i++) {  
 						resultStr+=",x"+i+"系数为:" + beta[i];  
 					} 
-		
-					resultDf.setIntercept(beta[0]);
+					
+					double[][] ha = {{beta[0]}};
+					resultDf2.setData(ha);
+					resultDf2.setMessage("这个是系数返回");
+					
 					
 					double[] coefficients = new double[beta.length-1];
 					
 					for (int i = 1 ; i<beta.length;i++) {  
 						coefficients[i-1] = beta[i];
 					} 
-		
-					resultDf.setCoefficients(coefficients);
+					
+					
+					double[][] coefficients2 = {coefficients};
+					
+					
+					resultDf.setData(coefficients2);
+					resultDf.setMessage("这个是截距");
+					
 				} catch (MathIllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -51,11 +58,13 @@ public class LinearImpl implements Linear {
 					
 				}
 		        
-		        
 		        resultDf.setMessage("运算成功");
 		        resultDf.setFlag(true);
 		        
-				return resultDf;
+		        DataFramePlus[] array = {resultDf2,resultDf};
+		        
+		        
+				return array;  
 	}
 
 
